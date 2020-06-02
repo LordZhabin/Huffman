@@ -71,8 +71,7 @@ int main() {
 	// считывание из файла output.txt и преобразование обратно
 	int number = 0;
 
-	F.read((char*)&a, sizeof(a));												//считываем первое число для расшифровки таблциы
-	a -= 32;																	//отнимаем значение int
+	F.read((char*)&a, sizeof(a));												//считываем первое число для расшифровки таблциы																//отнимаем значение int
 	while (a > 0) {
 		F.read((char*)&q, sizeof(q));											//считываем символ
 		F.read((char*)&b, sizeof(b));											//считываем его значение
@@ -126,12 +125,12 @@ int main() {
 			count = 0;
 			F >> byte;
 		}
-
+	}
 		F.close();
 		gotov.close();
 
 		m.clear();
 		cout << "Файл декодирован" << endl;
 		return 0;
-	}
+	
 }
