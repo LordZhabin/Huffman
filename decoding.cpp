@@ -6,13 +6,14 @@
 
 using namespace std;
 
-class Node {																	//класс бинарное дерево
-public:
+
+struct Node {																	//класс бинарное дерево
+//public:
 	int a;																		//число
 	char c;																		//символ
 	Node* left, * right;														//правый и левый потомок
 
-	Node() {}																	//перегрузка скобок
+	Node() { left = right = NULL; }												//перегрузка скобок
 
 	Node(Node* L, Node* R) {													//перегрузка
 		left = L;
@@ -21,6 +22,7 @@ public:
 	}
 };
 
+
 struct Compare {																//структура, которая помогает сравнивать 
 	bool operator() (Node* l, Node* r) const
 	{
@@ -28,9 +30,8 @@ struct Compare {																//структура, которая помогает сравнивать
 	}
 };
 
-
 vector<bool> code;																//глобальная переменная, чтобы собрать наш код в вектор
-map <char, vector<bool> > table;												//глобальная переменная, ассоциация символа с кодом - таблица
+map < char, vector<bool> > table;
 
 void BuildTable(Node* root) {
 	if (root->left != NULL) {													//если слева не ноль(т.е. существует потомок), то заходим в наш вектор
@@ -83,7 +84,7 @@ int main() {
 	cout << "Вывод таблицы символ: количество символов" << endl;
 	for (i = m.begin(); i != m.end(); ++i)	cout << i->first << ":" << i->second << endl;
 
-	for (i = m.begin(); i != m.end(); i++) {									//записываем узлы в начальный список
+	for (i = m.begin(); i != m.end(); ++i) {									//записываем узлы в начальный список
 		Node* p = new Node;														//создаем в динамической памяти нвоый узел
 		p->c = i->first;
 		p->a = i->second;

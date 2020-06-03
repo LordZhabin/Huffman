@@ -7,13 +7,28 @@
 
 using namespace std;
 
-class Node {																	//класс бинарное дерево
+/*class Node {																	//класс бинарное дерево
 public:
 	int a;																		//число
 	char c;																		//символ
 	Node* left, * right;														//правый и левый потомок
 
-	Node() {}																	//перегрузка скобок
+	Node() { left = right = NULL; }												//перегрузка скобок
+
+	Node(Node* L, Node* R) {													//перегрузка
+		left = L;
+		right = R;
+		a = L->a + R->a;
+	}
+};*/
+
+struct Node {																	//класс бинарное дерево
+//public:
+	int a;																		//число
+	char c;																		//символ
+	Node* left, * right;														//правый и левый потомок
+
+	Node() { left = right = NULL; }												//перегрузка скобок
 
 	Node(Node* L, Node* R) {													//перегрузка
 		left = L;
@@ -22,6 +37,7 @@ public:
 	}
 };
 
+
 struct Compare {																//структура, которая помогает сравнивать 
 	bool operator() (Node* l, Node* r) const
 	{
@@ -29,9 +45,8 @@ struct Compare {																//структура, которая помогает сравнивать
 	}
 };
 
-
 vector<bool> code;																//глобальная переменная, чтобы собрать наш код в вектор
-map <char, vector<bool> > table;												//глобальная переменная, ассоциация символа с кодом - таблица
+map < char, vector<bool> > table;
 
 void BuildTable(Node* root) {
 	if (root->left != NULL) {													//если слева не ноль(т.е. существует потомок), то заходим в наш вектор
@@ -65,17 +80,18 @@ int main() {
 // записываем начальные узлы в список list
 
 	list<Node*> t;																//cписок указателей на Node
-	map<char, int>::iterator i;
+	map< char, int>::iterator i;
 
 	cout << "Вывод символов: количество символов в текстовом документе" << endl;
 	// считаем частоты символов
-	map<char, int> m;															//массив
+	map< char, int> m;															//массив
 	while (f.get(c)) {															//пока не конец файла, считаем кол-во элементов
 		m[c]++;																	//считываем из файла текст (включая пробелы)
 	}
 
 	for (i = m.begin(); i != m.end(); ++i)
-		cout << i->first << ":" << i->second << endl;
+		//cout << i->first << ":" << i->second << endl;
+	cout << i->first << " (" << (int)(i->first) << ") " << ":" << i->second << endl;
 
 	for (i = m.begin(); i != m.end(); ++i) {									//записываем узлы в начальный список
 		Node* p = new Node;														//создаем в динамической памяти нвоый узел
